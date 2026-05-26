@@ -1,0 +1,35 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { title, description, currentPath } = Astro.props;
+---
+
+<BaseLayout {title} {description} {currentPath}>
+  <div class="section">
+    <div class="container">
+      <div class="layout-docs">
+        <aside class="docs-sidebar">
+          <nav>
+            <a href="/docs" class={currentPath === "/docs" ? "active" : ""}>Overview</a>
+            <a href="/docs/quick-start" class={currentPath === "/docs/quick-start" ? "active" : ""}>Quick Start</a>
+            <div class="sidebar-section">Language</div>
+            <a href="/docs/language" class={currentPath === "/docs/language" ? "active" : ""}>Language Reference</a>
+            <a href="/docs/stdlib" class={currentPath === "/docs/stdlib" ? "active" : ""}>Standard Library</a>
+            <div class="sidebar-section">Tooling</div>
+            <a href="/docs/packages" class={currentPath === "/docs/packages" ? "active" : ""}>Package Manager</a>
+            <a href="/docs/lsp" class={currentPath === "/docs/lsp" ? "active" : ""}>LSP &amp; Editor Setup</a>
+          </nav>
+        </aside>
+        <div class="docs-content">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

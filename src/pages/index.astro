@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroBlock from "../components/HeroBlock.astro";
+import StatBar from "../components/StatBar.astro";
+import FeatureGrid from "../components/FeatureGrid.astro";
+import BenchmarkTeaser from "../components/BenchmarkTeaser.astro";
+import { getSiteConfig } from "../site-config";
+
+const { version } = await getSiteConfig();
+---
+
+<BaseLayout>
+  <HeroBlock />
+
+  <div class="container" style="margin-top:var(--s-12);">
+    <StatBar />
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-label">Features</div>
+      <h2 style="margin-bottom:var(--s-6);">Everything you expect from a modern language</h2>
+      <FeatureGrid />
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-label">Performance</div>
+      <h2 style="margin-bottom:var(--s-6);">Within 1.0&ndash;1.4&times; of C++ on compute-bound work</h2>
+      <BenchmarkTeaser />
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-label">Tooling</div>
+      <h2 style="margin-bottom:var(--s-6);">First-class editor support</h2>
+
+      <div class="grid-2" style="margin-bottom:var(--s-6);">
+        <div class="box" style="padding:var(--s-6);">
+          <h4 style="margin-bottom:var(--s-2);">Language Server</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+            Full LSP with diagnostics, completion, hover, go-to-def, references, rename, formatting, inlay hints, and semantic tokens. Works with VS Code, Neovim, Helix, Emacs.
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-6);">
+          <h4 style="margin-bottom:var(--s-2);">Package Manager</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+            Declarative TOML-based dependencies, MVS resolution, Git-backed package store. No central registry. Just tag a release on your repo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-label">Install</div>
+      <h2 style="margin-bottom:var(--s-2);">Get Visuall</h2>
+      <p style="font-size:var(--fs-md);color:var(--c-text-secondary);margin-bottom:var(--s-6);">
+        Prebuilt binaries for Windows and Linux. LLVM not required.
+      </p>
+      <a href="/download" class="btn btn-primary">Download v{version}</a>
+      <a href="/docs/quick-start" class="btn" style="margin-left:var(--s-3);">Quick Start &rarr;</a>
+    </div>
+  </div>
+</BaseLayout>

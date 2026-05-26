@@ -1,0 +1,53 @@
+<div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);">
+  <table style="border:none;">
+    <thead>
+      <tr>
+        <th>Benchmark</th>
+        <th style="text-align:right;">C++ (ms)</th>
+        <th style="text-align:right;">Visuall (ms)</th>
+        <th style="text-align:right;">Python (ms)</th>
+        <th style="text-align:right;">vs C++</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Primes (trial div, 100K &times;3)</td>
+        <td style="text-align:right;font-family:var(--font-mono);">23.2</td>
+        <td style="text-align:right;font-family:var(--font-mono);">31.7</td>
+        <td style="text-align:right;font-family:var(--font-mono);">415</td>
+        <td style="text-align:right;font-family:var(--font-mono);color:var(--c-code-string);">1.4&times;</td>
+      </tr>
+      <tr>
+        <td>TreeSum (recursive, depth 22)</td>
+        <td style="text-align:right;font-family:var(--font-mono);">15.2</td>
+        <td style="text-align:right;font-family:var(--font-mono);">63.8</td>
+        <td style="text-align:right;font-family:var(--font-mono);">1,298</td>
+        <td style="text-align:right;font-family:var(--font-mono);color:var(--c-warning);">4.2&times;</td>
+      </tr>
+      <tr>
+        <td>Collatz (1..100K)</td>
+        <td style="text-align:right;font-family:var(--font-mono);">30.6</td>
+        <td style="text-align:right;font-family:var(--font-mono);">23.1</td>
+        <td style="text-align:right;font-family:var(--font-mono);">1,758</td>
+        <td style="text-align:right;font-family:var(--font-mono);color:var(--c-accent);">0.8&times;</td>
+      </tr>
+      <tr>
+        <td>Strings (200K f-strings)</td>
+        <td style="text-align:right;font-family:var(--font-mono);">27.9</td>
+        <td style="text-align:right;font-family:var(--font-mono);">47.9</td>
+        <td style="text-align:right;font-family:var(--font-mono);">162</td>
+        <td style="text-align:right;font-family:var(--font-mono);color:var(--c-code-string);">1.7&times;</td>
+      </tr>
+      <tr>
+        <td>Nested loops (2000&times;2000)</td>
+        <td style="text-align:right;font-family:var(--font-mono);">11.0</td>
+        <td style="text-align:right;font-family:var(--font-mono);">10.7</td>
+        <td style="text-align:right;font-family:var(--font-mono);">705</td>
+        <td style="text-align:right;font-family:var(--font-mono);color:var(--c-accent);">1.0&times;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="margin-top:var(--s-3);text-align:right;">
+  <a href="/benchmarks" style="font-size:var(--fs-sm);">See all 10 benchmarks &rarr;</a>
+</div>

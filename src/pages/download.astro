@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CodeBlock from "../components/CodeBlock.astro";
+import { getSiteConfig } from "../site-config";
+
+const { version, versionTag, releaseUrl, windowsZip, linuxTarball } = await getSiteConfig();
+---
+
+<BaseLayout title="Download" currentPath="/download">
+  <div class="page-header">
+    <div class="container">
+      <h1>Download</h1>
+      <p>
+        Prebuilt binaries for Windows and Linux (x86-64). No LLVM required.
+        <span class="version-badge" style="margin-left:var(--s-3);">v{version}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:var(--s-8);">
+    <div class="container">
+
+      <div class="grid-2" style="margin-bottom:var(--s-12);">
+
+        <!-- Windows -->
+        <div class="box" style="padding:var(--s-6);">
+          <h3 style="margin-bottom:var(--s-4);">Windows (x86-64)</h3>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Download the prebuilt release. No LLVM or build tools needed.
+          </p>
+          <a href={releaseUrl} class="btn btn-primary" style="margin-bottom:var(--s-4);">
+            Download .zip
+          </a>
+
+          <div class="section-label" style="margin-top:var(--s-6);">Install a C linker</div>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-3);">
+            visuallc emits object files and calls gcc to link. Install MinGW-W64:
+          </p>
+          <ol style="font-size:var(--fs-sm);color:var(--c-text-secondary);padding-left:var(--s-6);list-style:decimal;">
+            <li>Download <a href="https://winlibs.com/">WinLibs MinGW-W64</a> (UCRT, x86-64, POSIX threads)</li>
+            <li>Extract to <code>C:\mingw64\</code></li>
+            <li>Add <code>C:\mingw64\bin</code> to your system PATH</li>
+            <li>Verify: <code>gcc --version</code></li>
+          </ol>
+
+          <div class="section-label" style="margin-top:var(--s-6);">Use the compiler</div>
+          <CodeBlock
+            code={`cd C:\\visuall
+.\\visuallc.exe hello.vsl -o hello
+.\\hello.exe`}
+            lang="powershell"
+          />
+        </div>
+
+        <!-- Linux -->
+        <div class="box" style="padding:var(--s-6);">
+          <h3 style="margin-bottom:var(--s-4);">Linux (x86-64)</h3>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Download the prebuilt binary. No LLVM or build tools needed.
+          </p>
+          <a href={releaseUrl} class="btn btn-primary" style="margin-bottom:var(--s-4);">
+            Download .tar.gz
+          </a>
+
+          <div class="section-label" style="margin-top:var(--s-6);">Install a C linker</div>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-3);">
+            visuallc calls gcc to produce the final binary:
+          </p>
+          <CodeBlock
+            code={`# Ubuntu / Debian
+sudo apt install gcc
+
+# Fedora / RHEL
+sudo dnf install gcc
+
+# Arch
+sudo pacman -S gcc`}
+            lang="bash"
+          />
+
+          <div class="section-label" style="margin-top:var(--s-6);">Use the compiler</div>
+          <CodeBlock
+            code={`tar -xzf ${linuxTarball}
+cd visuallc-linux-x86_64
+./visuallc hello.vsl -o hello
+./hello`}
+            lang="bash"
+          />
+        </div>
+
+      </div>
+
+      <h2 style="margin-bottom:var(--s-4);">Build from Source</h2>
+      <div class="box" style="padding:var(--s-6);">
+        <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+          Requires CMake 3.20+, a C++17 compiler (GCC 12+, Clang 15+, or MSVC 2022+), and LLVM 17+.
+        </p>
+        <CodeBlock
+          code={`mkdir build && cd build
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build .`}
+          lang="bash"
+        />
+        <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-top:var(--s-4);">
+          If LLVM is in a non-standard location:
+          <code>cmake .. -DLLVM_DIR=/path/to/llvm/lib/cmake/llvm</code>
+        </p>
+        <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-top:var(--s-2);">
+          Full instructions in the <a href={`${import.meta.env.SITE || "https://visuall.dev"}/docs/quick-start`}>Quick Start guide</a> or the <a href="https://github.com/dogalesz/visuall#building">GitHub README</a>.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

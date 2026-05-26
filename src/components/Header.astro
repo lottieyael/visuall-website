@@ -1,0 +1,48 @@
+---
+import { getSiteConfig } from "../site-config";
+
+const { repoUrl } = await getSiteConfig();
+const { currentPath = "/" } = Astro.props;
+
+const navLinks = [
+  { href: "/features", label: "Features" },
+  { href: "/benchmarks", label: "Benchmarks" },
+  { href: "/download", label: "Download" },
+  { href: "/docs", label: "Docs" },
+];
+---
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="site-logo">visuall.</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      Menu
+    </button>
+
+    <nav class="site-nav" id="site-nav">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class={currentPath === link.href || currentPath.startsWith(link.href + "/") ? "active" : ""}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href={repoUrl} target="_blank" rel="noopener noreferrer">
+        GitHub &rarr;
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const nav = document.getElementById("site-nav");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+  }
+</script>

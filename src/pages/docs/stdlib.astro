@@ -1,0 +1,163 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+---
+
+<DocsLayout title="Standard Library" currentPath="/docs/stdlib">
+  <h1>Standard Library</h1>
+  <p style="color:var(--c-text-secondary);font-size:var(--fs-md);margin-bottom:var(--s-6);">
+    Visuall ships with a growing standard library of modules. All modules are written in Visuall
+    (with a small C runtime for primitives).
+  </p>
+
+  <h2>math</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Mathematical functions and constants.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Function</th><th>Signature</th></tr></thead>
+      <tbody>
+        <tr><td>sqrt</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>sin</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>cos</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>tan</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>log</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>pow</td><td style="font-family:var(--font-mono);">(base: float, exp: float) -> float</td></tr>
+        <tr><td>abs</td><td style="font-family:var(--font-mono);">(x: float) -> float</td></tr>
+        <tr><td>ceil</td><td style="font-family:var(--font-mono);">(x: float) -> int</td></tr>
+        <tr><td>floor</td><td style="font-family:var(--font-mono);">(x: float) -> int</td></tr>
+        <tr><td>Constants</td><td style="font-family:var(--font-mono);">PI, E</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>string</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    String manipulation utilities.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Function</th><th>Signature</th></tr></thead>
+      <tbody>
+        <tr><td>split</td><td style="font-family:var(--font-mono);">(s: str, delimiter: str) -> list</td></tr>
+        <tr><td>join</td><td style="font-family:var(--font-mono);">(parts: list, delimiter: str) -> str</td></tr>
+        <tr><td>replace</td><td style="font-family:var(--font-mono);">(s: str, old: str, new: str) -> str</td></tr>
+        <tr><td>upper</td><td style="font-family:var(--font-mono);">(s: str) -> str</td></tr>
+        <tr><td>lower</td><td style="font-family:var(--font-mono);">(s: str) -> str</td></tr>
+        <tr><td>trim</td><td style="font-family:var(--font-mono);">(s: str) -> str</td></tr>
+        <tr><td>starts_with</td><td style="font-family:var(--font-mono);">(s: str, prefix: str) -> bool</td></tr>
+        <tr><td>ends_with</td><td style="font-family:var(--font-mono);">(s: str, suffix: str) -> bool</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>collections</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Data structure classes: Stack, Queue, and Set.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Class</th><th>Methods</th></tr></thead>
+      <tbody>
+        <tr><td>Stack</td><td style="font-family:var(--font-mono);">push(v), pop() -> T, peek() -> T, is_empty() -> bool, size() -> int</td></tr>
+        <tr><td>Queue</td><td style="font-family:var(--font-mono);">enqueue(v), dequeue() -> T, peek() -> T, is_empty() -> bool, size() -> int</td></tr>
+        <tr><td>Set</td><td style="font-family:var(--font-mono);">add(v), remove(v), contains(v) -> bool, size() -> int</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>io</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    File I/O operations.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Function</th><th>Signature</th></tr></thead>
+      <tbody>
+        <tr><td>read</td><td style="font-family:var(--font-mono);">(path: str) -> str</td></tr>
+        <tr><td>write</td><td style="font-family:var(--font-mono);">(path: str, content: str)</td></tr>
+        <tr><td>append</td><td style="font-family:var(--font-mono);">(path: str, content: str)</td></tr>
+        <tr><td>list_dir</td><td style="font-family:var(--font-mono);">(path: str) -> list</td></tr>
+        <tr><td>open</td><td style="font-family:var(--font-mono);">(path: str) -> File</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>random</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Random number generation.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Function</th><th>Signature</th></tr></thead>
+      <tbody>
+        <tr><td>randint</td><td style="font-family:var(--font-mono);">(lo: int, hi: int) -> int</td></tr>
+        <tr><td>uniform</td><td style="font-family:var(--font-mono);">(lo: float, hi: float) -> float</td></tr>
+        <tr><td>choice</td><td style="font-family:var(--font-mono);">(items: list) -> T</td></tr>
+        <tr><td>shuffle</td><td style="font-family:var(--font-mono);">(items: list) -> list</td></tr>
+        <tr><td>seed</td><td style="font-family:var(--font-mono);">(s: int)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>datetime</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Date and time manipulation.
+  </p>
+  <CodeBlock
+    code={`import datetime
+
+now = datetime.now()
+print(now.format("%Y-%m-%d %H:%M:%S"))
+
+tomorrow = now.add_days(1)
+d = datetime.Date(2026, 5, 24)`}
+  />
+
+  <h2>json</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    JSON parsing and serialization.
+  </p>
+  <CodeBlock
+    code={`import json
+
+obj = json.parse('{"key": [1, 2, 3]}')
+s = json.stringify(obj)`}
+  />
+
+  <h2>network</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Socket programming and HTTP client.
+  </p>
+  <CodeBlock
+    code={`import network
+
+## Low-level sockets
+sock = network.Socket(network.AF_INET, network.SOCK_STREAM)
+sock.connect("example.com", 80)
+sock.send("GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n")
+response = sock.recv(4096)
+sock.close()
+
+## HTTP client
+client = network.HTTPClient()
+html = client.get("http://example.com/")`}
+  />
+
+  <h2>sys</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    System-level utilities.
+  </p>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-6);">
+    <table style="border:none;">
+      <thead><tr><th>Function / Var</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td style="font-family:var(--font-mono);">args</td><td>Command-line arguments (list of str)</td></tr>
+        <tr><td style="font-family:var(--font-mono);">exit(code: int)</td><td>Exit the process</td></tr>
+        <tr><td style="font-family:var(--font-mono);">env(name: str) -> str?</td><td>Read environment variable</td></tr>
+        <tr><td style="font-family:var(--font-mono);">time() -> float</td><td>Current Unix timestamp</td></tr>
+      </tbody>
+    </table>
+  </div>
+</DocsLayout>

@@ -1,0 +1,56 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+---
+
+<DocsLayout title="Documentation" currentPath="/docs">
+  <h1>Documentation</h1>
+  <p style="color:var(--c-text-secondary);font-size:var(--fs-md);margin-bottom:var(--s-8);">
+    Everything you need to get started with Visuall and use it effectively.
+  </p>
+
+  <div class="grid-2" style="margin-bottom:var(--s-8);">
+
+    <a href="/docs/quick-start" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">Quick Start</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        Write, compile, and run your first Visuall program in under 5 minutes.
+      </p>
+    </a>
+
+    <a href="/docs/language" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">Language Reference</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        Complete reference: types, functions, classes, control flow, data structures, and more.
+      </p>
+    </a>
+
+    <a href="/docs/stdlib" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">Standard Library</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        math, string, collections, I/O, random, datetime, json, network, and system modules.
+      </p>
+    </a>
+
+    <a href="/docs/packages" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">Package Manager</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        vslpkg: declaring dependencies, installing packages, and publishing to Git.
+      </p>
+    </a>
+
+    <a href="/docs/lsp" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">LSP &amp; Editor Setup</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        Set up the language server in VS Code, Neovim, or any LSP-compatible editor.
+      </p>
+    </a>
+
+    <a href="/download" class="box" style="padding:var(--s-6);text-decoration:none;color:inherit;">
+      <h3 style="font-size:var(--fs-lg);margin-bottom:var(--s-2);">Download</h3>
+      <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin:0;">
+        Prebuilt binaries for Windows and Linux. Build from source instructions.
+      </p>
+    </a>
+
+  </div>
+</DocsLayout>

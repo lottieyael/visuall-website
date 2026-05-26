@@ -1,0 +1,87 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+import { getSiteConfig } from "../../site-config";
+
+const { version, windowsZip, linuxTarball } = await getSiteConfig();
+---
+
+<DocsLayout title="Quick Start" currentPath="/docs/quick-start">
+  <h1>Quick Start</h1>
+  <p style="color:var(--c-text-secondary);font-size:var(--fs-md);margin-bottom:var(--s-6);">
+    Write, compile, and run your first Visuall program in under 5 minutes.
+  </p>
+
+  <h2>1. Download Visuall</h2>
+  <p>
+    Go to the <a href="https://github.com/dogalesz/visuall/releases">Releases page</a> and download the
+    prebuilt binary for your platform.
+  </p>
+
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    <strong>Windows:</strong> Download <code>{windowsZip}</code>, extract to <code>C:\visuall\</code>.
+    You also need <a href="https://winlibs.com/">MinGW-W64</a> for the C linker. Download, extract, and add <code>bin/</code> to your PATH.
+  </p>
+
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    <strong>Linux:</strong> Download <code>{linuxTarball}</code>, extract with
+    <code>tar -xzf {linuxTarball}</code>. Install <code>gcc</code> via your package manager.
+  </p>
+
+  <h2>2. Write a program</h2>
+  <p>
+    Create a file called <code>hello.vsl</code>:
+  </p>
+  <CodeBlock
+    code={`print("Hello, Visuall!")
+
+define greet(name: str, age: int) -> str:
+    return f"Hello {name}, you are {age} years old"
+
+message = greet("Developer", 1)
+print(message)
+
+## Data structures
+numbers = [1, 2, 3, 4, 5]
+squares = [x * x for x in numbers if x % 2 == 0]
+print(f"Squares of evens: {squares}")`}
+  />
+
+  <h2>3. Compile</h2>
+  <p>Open a terminal in the directory containing <code>hello.vsl</code>:</p>
+  <CodeBlock
+    code={`# Windows
+.\\visuallc.exe hello.vsl -o hello
+
+# Linux
+./visuallc hello.vsl -o hello`}
+    lang="bash"
+  />
+
+  <h2>4. Run</h2>
+  <CodeBlock
+    code={`# Windows
+.\\hello.exe
+
+# Linux
+./hello`}
+    lang="bash"
+  />
+
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    Output:
+  </p>
+  <CodeBlock
+    code={`Hello, Visuall!
+Hello Developer, you are 1 years old
+Squares of evens: [4, 16]`}
+  />
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li><a href="/docs/language">Language Reference</a>: full syntax and semantics</li>
+    <li><a href="/docs/stdlib">Standard Library</a>: built-in modules</li>
+    <li><a href="/docs/packages">Package Manager</a>: using vslpkg</li>
+    <li><a href="/docs/lsp">Editor Setup</a>: LSP integration</li>
+  </ul>
+</DocsLayout>

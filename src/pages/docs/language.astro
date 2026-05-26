@@ -1,0 +1,263 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+---
+
+<DocsLayout title="Language Reference" currentPath="/docs/language">
+  <h1>Language Reference</h1>
+  <p style="color:var(--c-text-secondary);font-size:var(--fs-md);margin-bottom:var(--s-6);">
+    A complete reference of Visuall syntax, types, and semantics.
+  </p>
+
+  <h2>Comments</h2>
+  <CodeBlock code={`## Single-line comment
+### Multi-line
+    comment ###`} />
+
+  <h2>Variables &amp; Types</h2>
+  <p>Visuall is statically typed with type inference. Basic types: <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>null</code>.</p>
+  <CodeBlock
+    code={`name = "Visuall"
+age = 25
+pi = 3.14159
+active = true
+nothing = null`}
+  />
+
+  <h2>Functions &amp; Lambdas</h2>
+  <CodeBlock
+    code={`define add(a: int, b: int) -> int:
+    return a + b
+
+## Lambdas
+square = x -> x ** 2
+transform = (x, y) -> x + y
+
+## Closures
+define make_adder(n: int):
+    return x -> x + n`}
+  />
+
+  <h2>Classes</h2>
+  <p>Single inheritance with <code>extends</code>. Constructor is <code>init</code>. Use <code>this</code> for field access.</p>
+  <CodeBlock
+    code={`class Point:
+    init(x: int, y: int):
+        this.x = x
+        this.y = y
+
+    define magnitude() -> float:
+        return sqrt(this.x ** 2 + this.y ** 2)
+
+class Point3D extends Point:
+    init(x: int, y: int, z: int):
+        super.init(x, y)
+        this.z = z
+
+p = Point3D(3, 4, 12)
+print(p.magnitude())`}
+  />
+
+  <h2>Control Flow</h2>
+  <CodeBlock
+    code={`## If / elsif / else
+if 18 <= age <= 65:
+    status = "working age"
+elsif age > 65:
+    status = "retired"
+else:
+    status = "young"
+
+## For-in loops
+for item in [1, 2, 3]:
+    print(item)
+
+for i in range(0, 10, 2):
+    print(i)
+
+## While loops
+while running:
+    if done:
+        break
+    continue
+
+## Context managers (with)
+with open("file.txt") as f:
+    data = f.read()`}
+  />
+
+  <h2>Data Structures</h2>
+  <CodeBlock
+    code={`## Lists
+numbers = [1, 2, 3, 4, 5]
+numbers[0] = 99
+
+## Tuples
+coords = (10, 20, 30)
+x, y, z = coords           ## unpacking
+
+## Dictionaries
+config = {"name": "app", "version": 1}
+
+## List comprehensions
+squares = [x * x for x in range(10)]
+evens = [x for x in numbers if x % 2 == 0]
+
+## Slicing
+first_three = numbers[0:3]
+every_other = numbers[0:5:2]
+tail = numbers[1:]`}
+  />
+
+  <h2>Strings &amp; F-strings</h2>
+  <CodeBlock
+    code={`greeting = "Hello, World!"
+message = f"Result: {value}, took {ms}ms"
+multipart = f"{name} scored {score} / {total}"`}
+  />
+
+  <h2>Error Handling</h2>
+  <CodeBlock
+    code={`try:
+    risky()
+catch IOError as e:
+    print(f"IO error: {e}")
+catch Error as e:
+    print(f"Error: {e}")
+finally:
+    cleanup()`}
+  />
+
+  <h2>Match Statements</h2>
+  <CodeBlock
+    code={`## Basic matching
+match status:
+    case 200:
+        print("OK")
+    case 404:
+        print("Not Found")
+    case _:
+        print("other")
+
+## Guards
+match value:
+    case x if x > 0:
+        print("positive")
+    case x if x < 0:
+        print("negative")
+    case _:
+        print("zero")
+
+## String and bool patterns
+match name:
+    case "alice":
+        role = "admin"
+    case _:
+        role = "user"`}
+  />
+
+  <h2>Generators (yield)</h2>
+  <CodeBlock
+    code={`define evens(n: int) -> int:
+    i = 0
+    while i < n:
+        yield i
+        i = i + 2
+
+for v in evens(10):
+    print(v)`}
+  />
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    A <code>yield</code> inside a function turns it into a generator: the function collects all yielded values into a list that is returned.
+  </p>
+
+  <h2>Enums</h2>
+  <CodeBlock
+    code={`enum Color:
+    RED
+    GREEN
+    BLUE
+
+x = Color.RED`}
+  />
+
+  <h2>Decorators</h2>
+  <CodeBlock
+    code={`@cache
+@log
+define compute(x: int) -> int:
+    return x * 2`}
+  />
+
+  <h2>Generics &amp; Nullable Types</h2>
+  <CodeBlock
+    code={`## Generic type parameters
+define clamp<T: int>(x: T, lo: T, hi: T) -> T:
+    ...
+
+## Nullable return type
+define find(items: list, key: str) -> str?:
+    ## returns str or null
+    ...`}
+  />
+
+  <h2>Walrus Operator</h2>
+  <CodeBlock
+    code={`if (n := len(data)) > 10:
+    print(f"too large: {n}")`}
+  />
+
+  <h2>isinstance</h2>
+  <CodeBlock
+    code={`if isinstance(obj, Animal):
+    obj.speak()`}
+  />
+
+  <h2>Operators</h2>
+  <CodeBlock
+    code={`## Arithmetic
+x = 2 ** 10        ## exponentiation
+y = 17 // 3        ## integer division
+z = 17 % 3         ## modulo
+
+## Bitwise
+a = x & 0xFF
+b = x | mask
+c = x ^ toggle
+d = x << 4
+e = x >> 2
+
+## Logical
+flag = true and not false
+result = a or b
+
+## Chained comparisons
+if 0 <= x <= 100:
+    print("in range")`}
+  />
+
+  <h2>Module System</h2>
+  <CodeBlock
+    code={`## Import a whole module
+import math
+print(math.sqrt(16))
+
+## Import specific names
+from string import upper, split
+print(upper("hello"))
+
+## Multi-file compilation
+## visuallc resolves imports via vsl.lock automatically`}
+  />
+
+  <h2>Debug Flags</h2>
+  <p>Compiler diagnostics available via CLI flags:</p>
+  <CodeBlock
+    code={`./visuallc --tokens file.vsl       # Dump token stream
+./visuallc --ast file.vsl          # Dump parsed AST
+./visuallc --emit-ir file.vsl      # Emit LLVM IR to stdout
+./visuallc --dump-modules file.vsl # Print resolved module paths
+./visuallc --gc-stats file.vsl -o p# Print GC statistics at exit`}
+    lang="bash"
+  />
+</DocsLayout>

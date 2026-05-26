@@ -1,0 +1,42 @@
+---
+import CodeBlock from "./CodeBlock.astro";
+import { getSiteConfig } from "../site-config";
+
+const { version } = await getSiteConfig();
+---
+
+<div class="hero">
+  <div class="container">
+    <h1>Python-shaped syntax.<br />C++ speeds.</h1>
+    <p>
+      Visuall compiles directly to native machine code through LLVM IR.
+      Classes, closures, f-strings, match statements, generators. All at
+      near-C++ performance with a Pythonic syntax.
+    </p>
+    <div style="margin-top:var(--s-6);display:flex;gap:var(--s-3);flex-wrap:wrap;">
+      <a href="/download" class="btn btn-primary">Download v{version}</a>
+      <a href="/docs/quick-start" class="btn">Quick Start &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top:var(--s-8);">
+  <CodeBlock
+    code={`class Point:
+    init(x: int, y: int):
+        this.x = x
+        this.y = y
+
+    define magnitude() -> float:
+        return sqrt(this.x ** 2 + this.y ** 2)
+
+define greet(name: str, age: int) -> str:
+    return f"Hello {name}, you are {age} years old"
+
+data = [x * x for x in range(10) if x % 2 == 0]
+point = Point(3, 4)
+print(f"Point magnitude: {point.magnitude()}")
+print(greet("Visuall", 1))`}
+    label="example.vsl: compiles to native code"
+  />
+</div>

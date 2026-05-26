@@ -1,0 +1,17 @@
+---
+import { getSiteConfig } from "../site-config";
+
+const { repoUrl, changelogUrl, licenseUrl, contributingUrl } = await getSiteConfig();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <span>Visuall. MIT licensed.</span>
+    <nav class="footer-links">
+      <a href={repoUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={changelogUrl}>Changelog</a>
+      <a href={licenseUrl}>License</a>
+      <a href={contributingUrl}>Contributing</a>
+    </nav>
+  </div>
+</footer>

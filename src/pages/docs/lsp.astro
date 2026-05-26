@@ -1,0 +1,85 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
+---
+
+<DocsLayout title="LSP &amp; Editor Setup" currentPath="/docs/lsp">
+  <h1>LSP &amp; Editor Setup</h1>
+  <p style="color:var(--c-text-secondary);font-size:var(--fs-md);margin-bottom:var(--s-6);">
+    visuall-lsp is a Language Server Protocol server that brings Visuall language support
+    to any LSP-compatible editor.
+  </p>
+
+  <h2>Capabilities</h2>
+  <div style="overflow-x:auto;border:var(--border-width) solid var(--c-border);margin-bottom:var(--s-8);">
+    <table style="border:none;">
+      <thead><tr><th>Feature</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Diagnostics</td><td>Real-time error and warning underlines with range highlighting</td></tr>
+        <tr><td>Completion</td><td>Scope-aware autocomplete (trigger: <code>.</code>, <code>(</code>, <code>"</code>, <code>'</code>)</td></tr>
+        <tr><td>Hover</td><td>Type information and documentation on hover</td></tr>
+        <tr><td>Go to Definition</td><td>Jump to symbol definitions (cross-file via workspace index)</td></tr>
+        <tr><td>Find References</td><td>List all usages of a symbol across the workspace</td></tr>
+        <tr><td>Document Symbols</td><td>Breadcrumb outline of functions, classes, and scopes</td></tr>
+        <tr><td>Workspace Symbols</td><td>Fuzzy search for symbols across all project files</td></tr>
+        <tr><td>Formatting</td><td>Full-document formatting</td></tr>
+        <tr><td>Inlay Hints</td><td>Inline type annotations and parameter names</td></tr>
+        <tr><td>Semantic Tokens</td><td>Syntax highlighting (keywords, functions, classes, etc.)</td></tr>
+        <tr><td>Signature Help</td><td>Function parameter hints on <code>(</code> and <code>,</code> trigger</td></tr>
+        <tr><td>Code Actions</td><td>Quick fixes (missing return, typo suggestions)</td></tr>
+        <tr><td>Rename</td><td>Cross-file symbol renaming</td></tr>
+        <tr><td>Incremental Sync</td><td>Efficient range-based document sync for large files</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Building</h2>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+    The LSP builds alongside the compiler when <code>BUILD_LSP=ON</code> (default):
+  </p>
+  <CodeBlock
+    code={`cd build
+cmake .. -DBUILD_LSP=ON
+cmake --build . --target visuall-lsp`}
+    lang="bash"
+  />
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    The binary <code>visuall-lsp</code> will be in <code>build/tools/visuall-lsp/</code>.
+  </p>
+
+  <h2>Editor Setup</h2>
+
+  <h3>VS Code</h3>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+    Add to <code>settings.json</code>:
+  </p>
+  <CodeBlock
+    code={`"visuall.lsp.path": "/path/to/build/tools/visuall-lsp/visuall-lsp"`}
+    lang="json"
+  />
+
+  <h3>Neovim</h3>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+    Using <code>nvim-lspconfig</code>:
+  </p>
+  <CodeBlock
+    code={`local lspconfig = require('lspconfig')
+lspconfig.visuall_lsp = {
+  cmd = { '/path/to/visuall-lsp' },
+  filetypes = { 'visuall' },
+  root_dir = lspconfig.util.root_pattern('vsl.toml', '.git'),
+}`}
+    lang="lua"
+  />
+
+  <h3>Other Editors</h3>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+    visuall-lsp implements standard LSP over stdio. Configure any LSP-compatible editor
+    (Helix, Emacs, Zed, etc.) to launch <code>visuall-lsp</code> for <code>.vsl</code> files.
+  </p>
+  <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+    The server discovers project structure by looking for a <code>vsl.toml</code> or
+    <code>.git</code> directory at the workspace root, and indexes all <code>.vsl</code>
+    files under it.
+  </p>
+</DocsLayout>

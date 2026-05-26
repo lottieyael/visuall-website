@@ -1,0 +1,258 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CodeBlock from "../components/CodeBlock.astro";
+---
+
+<BaseLayout title="Features" currentPath="/features">
+  <div class="page-header">
+    <div class="container">
+      <h1>Features</h1>
+      <p>Everything in the language, toolchain, and standard library.</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:var(--s-8);">
+    <div class="container">
+
+      <div class="section-label">Language</div>
+      <h2 style="margin-bottom:var(--s-6);">Pythonic syntax, native performance</h2>
+
+      <div class="grid-2" style="margin-bottom:var(--s-8);">
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Classes &amp; Inheritance</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Single inheritance with super, constructors, methods, and fields.
+          </p>
+          <CodeBlock
+            code={`class Point:
+    init(x: int, y: int):
+        this.x = x
+        this.y = y
+
+class Point3D extends Point:
+    init(x: int, y: int, z: int):
+        super.init(x, y)
+        this.z = z`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Closures &amp; Lambdas</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Full lexical closures with captured variable analysis.
+          </p>
+          <CodeBlock
+            code={`square = x -> x ** 2
+add = (a, b) -> a + b
+
+define make_counter(start: int):
+    return () ->:
+        nonlocal start
+        cur = start
+        start = start + 1
+        return cur`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Match Statements</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Pattern matching with guards and wildcards.
+          </p>
+          <CodeBlock
+            code={`match value:
+    case 200:        print("OK")
+    case 404:        print("Not Found")
+    case x if x > 0: print("positive")
+    case _:          print("other")`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Generators</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            yield-based generators that collect into lists.
+          </p>
+          <CodeBlock
+            code={`define evens(n: int) -> int:
+    i = 0
+    while i < n:
+        yield i
+        i = i + 2
+
+for v in evens(10):
+    print(v)`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>List Comprehensions &amp; Slicing</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Full list comprehensions with conditions, plus Python-style slicing.
+          </p>
+          <CodeBlock
+            code={`squares = [x * x for x in range(10)]
+evens = [x for x in numbers if x % 2 == 0]
+
+first_three = numbers[0:3]
+every_other = numbers[0:5:2]
+tail = numbers[1:]`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Error Handling</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            try/catch/finally with typed exceptions.
+          </p>
+          <CodeBlock
+            code={`try:
+    risky()
+catch IOError as e:
+    print(f"IO error: {e}")
+catch Error as e:
+    print(f"Error: {e}")
+finally:
+    cleanup()`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Enums &amp; Decorators</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Enum types and function decorators.
+          </p>
+          <CodeBlock
+            code={`enum Color:
+    RED
+    GREEN
+    BLUE
+
+@cache
+@log
+define compute(x: int) -> int:
+    return x * 2`}
+          />
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Generics &amp; Nullable Types</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);margin-bottom:var(--s-4);">
+            Generic type parameters and nullable type syntax.
+          </p>
+          <CodeBlock
+            code={`define clamp<T: int>(x: T, lo: T, hi: T) -> T:
+    ...
+
+define find(items: list, key: str) -> str?:
+    ## returns str or null
+    ...`}
+          />
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:var(--s-8);">Tooling</div>
+      <h2 style="margin-bottom:var(--s-6);">Full development toolchain</h2>
+
+      <div class="grid-2" style="margin-bottom:var(--s-8);">
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>LSP Server</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+            Diagnostics, completion, hover, go-to-definition, references, rename, formatting,
+            inlay hints, semantic tokens, signature help, and code actions. Works with any
+            LSP-compatible editor.
+          </p>
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Package Manager (vslpkg)</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+            Declarative TOML manifests, MVS dependency resolution, Git-based package
+            distribution. No central registry. Any Git repo with a vsl.toml is a package.
+          </p>
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Debug Flags</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+            Dump tokens, AST, LLVM IR, resolved module paths, and GC statistics at exit.
+            Built-in compiler introspection.
+          </p>
+        </div>
+
+        <div class="box" style="padding:var(--s-6);">
+          <h4>Module System</h4>
+          <p style="font-size:var(--fs-sm);color:var(--c-text-secondary);">
+            import / from ... import syntax. Multi-file compilation with automatic
+            dependency resolution via vsl.lock.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="section-label" style="margin-top:var(--s-8);">Standard Library</div>
+      <h2 style="margin-bottom:var(--s-6);">Batteries included</h2>
+
+      <div class="grid-4" style="margin-bottom:var(--s-12);">
+        <div class="box" style="padding:var(--s-4);">
+          <h4>math</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            sqrt, sin, cos, log, pow, abs, ceil, floor, pi, e
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>string</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            split, join, replace, upper, lower, trim, starts_with, ends_with
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>collections</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            Stack, Queue, Set with push, pop, enqueue, dequeue, add, remove
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>io</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            read, write, append, list_dir, file iteration
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>random</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            randint, uniform, choice, shuffle, seed
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>datetime</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            Date, Time, now, format, add_days, diff
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>json</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            parse, stringify, JSON serialization
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>network</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            Socket, HTTPClient, TCP/UDP, HTTP GET/POST
+          </p>
+        </div>
+        <div class="box" style="padding:var(--s-4);">
+          <h4>sys</h4>
+          <p style="font-size:var(--fs-xs);color:var(--c-text-secondary);margin:0;">
+            args, exit, env, time, process management
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
