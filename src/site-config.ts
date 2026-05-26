@@ -5,7 +5,7 @@
  */
 
 const DEFAULT_VERSION = "1.1.0";
-const GITHUB_REPO = "dogalesz/visuall";
+const GITHUB_REPO = "lottieyael/visuall";
 
 interface SiteConfig {
   version: string;
